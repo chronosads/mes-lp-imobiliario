@@ -641,3 +641,15 @@ header[data-tema="claro"] .brand__navy{display:block}
   .js section[data-edge]::before{transform:scaleX(1);transition:none}
   .feature__media::after,.lawyer__photo::after{transform:translate(14px,14px)}
 }
+
+/* ---------- ponte entre as duas páginas ----------
+   Com domínio próprio, a menção à "página própria do escritório" virou link
+   de verdade. É link inline dentro de parágrafo, caso que a WCAG 2.5.8
+   isenta do alvo mínimo — mas ganha sublinhado e área clicável maior do que
+   o texto puro, para não depender só da cor. */
+.scope__hint a{
+  display:inline-block;padding:5px 1px;color:var(--gold);
+  text-decoration:none;border-bottom:1px solid currentColor;
+  transition:color .3s,border-color .3s;
+}
+.scope__hint a:hover{color:var(--gold-soft)}
