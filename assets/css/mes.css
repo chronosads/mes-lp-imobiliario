@@ -186,6 +186,14 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;gap:2
 }
 .band figcaption span{display:flex;align-items:center;gap:14px;width:min(100% - calc(var(--gutter) * 2),var(--maxw));margin-inline:auto}
 .band figcaption span::after{content:"";flex:1;height:1px;background:var(--gold);opacity:.6}
+/* No celular a legenda quebrava em duas linhas e espremia o filete até sumir.
+   Abaixo de 620 px ela fica menor, sem filete, e o pé da faixa escurece mais
+   para o texto não disputar legibilidade com o claro da foto. */
+@media (max-width:620px){
+  .band figcaption{bottom:18px;font-size:.625rem;letter-spacing:.13em}
+  .band figcaption span::after{display:none}
+  .band::after{background:linear-gradient(180deg,rgba(25,40,71,.5),rgba(25,40,71,.2) 38%,rgba(13,21,39,.9))}
+}
 
 /* ---------- blocos ---------- */
 section{padding:clamp(72px,10vw,132px) 0;position:relative}
