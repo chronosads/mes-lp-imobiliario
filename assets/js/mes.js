@@ -241,9 +241,9 @@
   /* ---- 7 · quadro único da rolagem ----
      Progresso, paralaxe, datilografia ao rolar, tema do cabeçalho,
      filete das seções e botão flutuante: tudo num rAF só, agendado
-     pela rolagem. Só transform e opacity; o quadro lê todas as
-     caixas antes de escrever qualquer estilo, então não há reflow
-     forçado no meio do laço. */
+     pela rolagem. Só transform e opacity, e o quadro é dividido em
+     duas fases — LER tudo, depois ESCREVER tudo —, porque intercalar
+     os dois força recálculo de layout a cada elemento. */
   (function () {
     var prog = document.querySelector(".prog");
     var float = document.querySelector(".float");
@@ -259,31 +259,63 @@
     var temaAtual = "";
     var quadro = function () {
       pedido = false;
-      var vh = innerHeight;
 
+      /* ---------- FASE 1 · LER. Nenhuma escrita daqui até o fim do bloco.
+         Ler caixa e escrever estilo alternadamente, elemento a elemento,
+         obriga o navegador a recalcular layout a cada volta do laço — o
+         Lighthouse mediu 65 ms de "Forced reflow" fazendo exatamente isso. */
+      var vh = innerHeight;
+      var y = scrollY;
+      var alturaDoc = prog ? document.documentElement.scrollHeight : 0;
+      var alturaHeader = header ? header.offsetHeight : 0;
+
+      var lidasCamadas = camadas.map(function (el) {
+        return { el: el, r: el.getBoundingClientRect() };
+      });
+      var lidasDigita = digitaveis.map(function (d) {
+        return { d: d, r: d.letras.length ? d.el.getBoundingClientRect() : null };
+      });
+      var lidasBordas = bordas.map(function (s) {
+        return { s: s, topo: s.__edge ? Infinity : s.getBoundingClientRect().top };
+      });
+      var temaLido = null;
+      if (header) {
+        var linha = alturaHeader / 2 + 6;
+        temaLido = "escuro";
+        for (var i = 0; i < secoes.length; i++) {
+          var rs = secoes[i].getBoundingClientRect();
+          if (rs.top <= linha && rs.bottom > linha) {
+            temaLido = secoes[i].classList.contains("sec--paper") || secoes[i].classList.contains("sec--cream") ? "claro" : "escuro";
+            break;
+          }
+        }
+      }
+      var rHero = hero ? hero.getBoundingClientRect() : null;
+      var rContato = contato ? contato.getBoundingClientRect() : null;
+
+      /* ---------- FASE 2 · ESCREVER. Nenhuma leitura de layout daqui em diante. */
       if (prog) {
-        var alcance = document.documentElement.scrollHeight - vh;
-        prog.style.setProperty("--p", alcance > 0 ? Math.min(1, scrollY / alcance).toFixed(4) : 0);
+        var alcance = alturaDoc - vh;
+        prog.style.setProperty("--p", alcance > 0 ? Math.min(1, y / alcance).toFixed(4) : 0);
       }
 
-      camadas.forEach(function (el) {
-        var r = el.getBoundingClientRect();
+      lidasCamadas.forEach(function (c) {
+        var r = c.r;
         if (r.bottom < -140 || r.top > vh + 140) return;
-        var amp = Number(el.getAttribute("data-par")) || 14;
+        var amp = Number(c.el.getAttribute("data-par")) || 14;
         var centro = r.top + r.height / 2 - vh / 2;
         var py = -(centro / vh) * amp;
-        el.style.setProperty("--py", py.toFixed(1) + "px");
+        c.el.style.setProperty("--py", py.toFixed(1) + "px");
         /* a moldura anda ao contrário da foto: é o que dá a camada.
            Ela vive na .feature__media / .lawyer__photo, não no .shot
            que recorta a imagem. */
-        var moldura = el.closest(".feature__media,.lawyer__photo");
+        var moldura = c.el.closest(".feature__media,.lawyer__photo");
         if (moldura) moldura.style.setProperty("--pyc", (py * -0.42).toFixed(1) + "px");
       });
 
-      digitaveis.forEach(function (d) {
-        if (!d.letras.length) return;
-        var r = d.el.getBoundingClientRect();
-        if (r.bottom < -80 || r.top > vh + 80) return;
+      lidasDigita.forEach(function (x) {
+        var d = x.d, r = x.r;
+        if (!r || r.bottom < -80 || r.top > vh + 80) return;
         var p = trava((vh - r.top) / (vh * 0.5), 0, 1);
         var n = Math.round(p * d.letras.length);
         if (n === d.n) return;
@@ -294,38 +326,23 @@
         });
       });
 
-      bordas.forEach(function (s) {
-        if (s.__edge) return;
-        if (s.getBoundingClientRect().top < vh * 0.92) {
-          s.__edge = 1;
-          s.classList.add("edge-in");
+      lidasBordas.forEach(function (b) {
+        if (b.topo < vh * 0.92) {
+          b.s.__edge = 1;
+          b.s.classList.add("edge-in");
         }
       });
 
-      if (header) {
-        /* Veste a seção que passa sob a linha do cabeçalho. Por geometria,
-           não por elementFromPoint: o cabeçalho é fixo e cobre o próprio
-           ponto que seria testado, então o teste devolvia sempre ele mesmo. */
-        var linha = header.offsetHeight / 2 + 6;
-        var t = "escuro";
-        for (var i = 0; i < secoes.length; i++) {
-          var rs = secoes[i].getBoundingClientRect();
-          if (rs.top <= linha && rs.bottom > linha) {
-            t = secoes[i].classList.contains("sec--paper") || secoes[i].classList.contains("sec--cream") ? "claro" : "escuro";
-            break;
-          }
-        }
-        if (t !== temaAtual) {
-          temaAtual = t;
-          header.setAttribute("data-tema", t);
-        }
+      if (header && temaLido !== temaAtual) {
+        temaAtual = temaLido;
+        header.setAttribute("data-tema", temaLido);
       }
 
       if (float) {
         /* some enquanto o herói está na tela e quando o contato chega:
            ali já existe um botão grande, e dois ao mesmo tempo leem como erro */
-        var passouHero = hero ? hero.getBoundingClientRect().bottom < vh * 0.4 : scrollY > vh * 0.6;
-        var chegouContato = contato ? contato.getBoundingClientRect().top < vh * 0.85 : false;
+        var passouHero = rHero ? rHero.bottom < vh * 0.4 : y > vh * 0.6;
+        var chegouContato = rContato ? rContato.top < vh * 0.85 : false;
         if (passouHero && !chegouContato) float.removeAttribute("data-off");
         else float.setAttribute("data-off", "");
       }
