@@ -19,9 +19,8 @@
 <meta property="og:image" content="https://imobiliario.mes.adv.br/assets/img/chaves-imovel.jpg">
 <meta property="og:image:alt" content="Entrega das chaves de um imóvel entre duas pessoas">
 <link rel="icon" href="assets/brand/logo-mes.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/mes.css">
 </head>
 <body>
@@ -41,7 +40,7 @@
 
 <header id="topo">
   <div class="wrap">
-    <a class="brand" href="#topo" aria-label="MES Advogados — Moura e Sella">
+    <a class="brand" href="#topo">
       <img class="brand__cream" src="assets/brand/logo-mes-cream.svg" alt="MES Advogados" width="104" height="36">
       <img class="brand__navy" src="assets/brand/logo-mes.svg" alt="" aria-hidden="true" width="104" height="36">
       <span class="oab">OAB/PR 45.770</span>
@@ -51,14 +50,14 @@
 </header>
 
 <nav class="rail" aria-label="Seções da página">
-  <a href="#situacoes" aria-label="Quando o assunto aparece"><span>01</span></a>
-  <a href="#atuacao" aria-label="Frentes de atuação"><span>02</span></a>
-  <a href="#inventario" aria-label="Inventários e sucessões"><span>03</span></a>
-  <a href="#metodo" aria-label="Como um caso é conduzido"><span>04</span></a>
-  <a href="#advogado" aria-label="Quem conduz"><span>05</span></a>
-  <a href="#duvidas" aria-label="Dúvidas frequentes"><span>06</span></a>
-  <a href="#escopo" aria-label="Escopo de atendimento"><span>07</span></a>
-  <a href="#contato" aria-label="Contato"><span>08</span></a>
+  <a href="#situacoes" aria-label="01 — Quando o assunto aparece"><span>01</span></a>
+  <a href="#atuacao" aria-label="02 — Frentes de atuação"><span>02</span></a>
+  <a href="#inventario" aria-label="03 — Inventários e sucessões"><span>03</span></a>
+  <a href="#metodo" aria-label="04 — Como um caso é conduzido"><span>04</span></a>
+  <a href="#advogado" aria-label="05 — Quem conduz"><span>05</span></a>
+  <a href="#duvidas" aria-label="06 — Dúvidas frequentes"><span>06</span></a>
+  <a href="#escopo" aria-label="07 — Escopo de atendimento"><span>07</span></a>
+  <a href="#contato" aria-label="08 — Contato"><span>08</span></a>
 </nav>
 
 <main id="conteudo">
@@ -69,7 +68,7 @@
     <div class="wrap">
       <p class="eyebrow" data-reveal><span class="num" data-type>Direito Imobiliário</span> <span class="diamond" aria-hidden="true"></span> Urbano e rural</p>
       <h1 id="h1" data-split>O imóvel é seu.<br>O papel precisa <em>dizer o mesmo.</em></h1>
-      <p class="hero__lead" data-reveal>Compra e venda, locação, regularização registral e inventários com imóveis, urbanos e rurais. Conteúdo informativo sobre o que a documentação precisa sustentar antes de você assinar, vender, financiar ou partilhar.</p>
+      <p class="hero__lead">Compra e venda, locação, regularização registral e inventários com imóveis, urbanos e rurais. Conteúdo informativo sobre o que a documentação precisa sustentar antes de você assinar, vender, financiar ou partilhar.</p>
       <div class="hero__cta" data-reveal>
         <a class="btn" href="#situacoes">Entenda como funciona</a>
         <a class="btn btn--ghost" href="https://wa.me/5541988349124?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20de%20Direito%20Imobili%C3%A1rio%20e%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o." data-cta="hero"><svg class="ico" width="17" height="17" aria-hidden="true"><use href="#ico-wa"></use></svg>Falar no WhatsApp</a>

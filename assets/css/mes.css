@@ -1,4 +1,35 @@
 /* ============================================================
+   FONTES — auto-hospedadas desde 13/11/2026.
+
+   Antes vinham do Google Fonts por <link rel=stylesheet>, que é
+   render-blocking: o Lighthouse mediu 950 ms de atraso no mobile,
+   e o LCP desta página é TEXTO, então esse atraso ia inteiro para
+   a métrica. Servidas da mesma origem, não há DNS, TLS nem conexão
+   nova, e o CSS deixa de bloquear a pintura.
+
+   Só o subset `latin`: conferido caractere a caractere que todo o
+   texto das duas páginas cabe nele (os acentos do português são
+   todos <= U+00FF e o intervalo U+2000-206F cobre o travessão).
+   São as fontes variáveis, então um arquivo serve 400 e 500.
+   Playfair Display e Inter são OFL — auto-hospedar é permitido.
+   ============================================================ */
+@font-face{
+  font-family:"Inter";font-style:normal;font-weight:400 600;font-display:swap;
+  src:url("../fonts/inter-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:"Playfair Display";font-style:normal;font-weight:400 600;font-display:swap;
+  src:url("../fonts/playfair-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:"Playfair Display";font-style:italic;font-weight:400 500;font-display:swap;
+  src:url("../fonts/playfair-italic-latin.woff2") format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+
+/* ============================================================
    MES Advogados — folha compartilhada pelas DUAS landing pages
    (direito-imobiliario/ e credito-rural/). As duas são a mesma
    marca: qualquer mudança aqui vale para as duas.
@@ -24,6 +55,7 @@
   --cream-dim:#ded3bd;
   --grey:#868887;        /* cinza da marca: só sobre o ink do rodapé */
   --grey-dim:#9aa09d;    /* cinza legível sobre o navy (AA) */
+  --ink-soft:#55607d;    /* rótulo de seção sobre papel/creme: 5,70 e 4,91 (AA) */
   --paper:#f7f4ee;
   --line-dark:rgba(236,227,210,.20);
   --line-light:rgba(25,40,71,.16);
@@ -68,7 +100,7 @@ p{margin:0}
   color:var(--gold);margin-bottom:28px;
 }
 .eyebrow::after{content:"";flex:1;height:1px;background:currentColor;opacity:.35}
-.eyebrow .num{font-variant-numeric:tabular-nums;opacity:.85}
+.eyebrow .num{font-variant-numeric:tabular-nums}
 
 /* ---------- losango: motivo do logotipo ---------- */
 .diamond{width:7px;height:7px;background:currentColor;transform:rotate(45deg);flex:none}
@@ -199,7 +231,11 @@ header .wrap{display:flex;align-items:center;justify-content:space-between;gap:2
 section{padding:clamp(72px,10vw,132px) 0;position:relative}
 .sec--paper{background:var(--paper);color:var(--navy)}
 .sec--cream{background:var(--cream);color:var(--navy)}
-.sec--paper .eyebrow,.sec--cream .eyebrow{color:var(--navy);opacity:.75}
+/* Opacidade em texto é armadilha de contraste: o Lighthouse mede a cor
+   RESULTANTE, e navy a 75% sobre papel dá 3,97 — reprova em AA. O meu
+   próprio medidor não via isso porque lia só a cor declarada. Virou cor
+   sólida, medida: 5,70 sobre papel e 4,91 sobre creme. */
+.sec--paper .eyebrow,.sec--cream .eyebrow{color:var(--ink-soft)}
 .sec--deep{background:var(--navy-deep)}
 .sec__head{max-width:62ch;margin-bottom:clamp(44px,5vw,68px)}
 .sec__head h2{font-size:clamp(1.85rem,4vw,3.1rem);letter-spacing:-.01em;margin-bottom:22px}
@@ -572,7 +608,9 @@ h1 .w.on,h2 .w.on{opacity:1;transform:none}
    por opacidade, em vez de inserir texto, evita que a quebra de
    linha seja reescrita a cada letra. */
 .js [data-type-scroll] .tw{display:inline}
-.js [data-type-scroll] i{opacity:.16;font-style:normal;transition:opacity .18s linear}
+/* invisível, não esmaecida: texto a 16% reprova em contraste, e o efeito
+   fica mais limpo aparecendo do nada do que clareando de um fantasma */
+.js [data-type-scroll] i{opacity:0;font-style:normal;transition:opacity .18s linear}
 .js [data-type-scroll] i.on{opacity:1}
 .js [data-type-scroll] i.cur{position:relative}
 .js [data-type-scroll] i.cur::after{
