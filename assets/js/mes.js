@@ -119,6 +119,86 @@
     setTimeout(passo, 420);
   })();
 
+  /* ---- 4c · digitação AO ROLAR ----
+     É o efeito que o André descreveu ("vai digitando alguns textos")
+     e o que o site da Chronos faz no bloco MEDIR CRIAR VEICULAR
+     ESCALAR: a pista vai de "o rótulo encosta na borda de baixo" até
+     meia tela depois. O texto acompanha o polegar e desdigita se
+     você voltar. Cada letra é um <i> que já nasce no lugar. */
+  function letrasDe(el) {
+    var saida = [];
+    (function anda(node) {
+      slice(node.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          if (!n.nodeValue.trim()) return;
+          /* As letras vão dentro de UM invólucro, não soltas: o rótulo é um
+             container flex, e letra solta vira item de flex — a linha deixa
+             de quebrar e o rótulo estoura a largura da página. */
+          var caixa = document.createElement("span");
+          caixa.className = "tw";
+          n.nodeValue.split("").forEach(function (ch) {
+            var i = document.createElement("i");
+            i.textContent = ch;
+            caixa.appendChild(i);
+            if (ch.trim()) saida.push(i);
+          });
+          node.replaceChild(caixa, n);
+        } else if (n.nodeType === 1 && !n.hasAttribute("aria-hidden")) {
+          anda(n);
+        }
+      });
+    })(el);
+    return saida;
+  }
+
+  var digitaveis = slice(document.querySelectorAll("[data-type-scroll]")).map(function (el) {
+    return { el: el, letras: reduce ? [] : letrasDe(el) };
+  });
+
+  /* ---- 2b · anel que segue o ponteiro ---- */
+  var anel = document.querySelector(".anel");
+  var anelEstado = { x: 0, y: 0, ax: 0, ay: 0, vis: false, cl: false, tema: "" };
+  if (anel && !matchMedia("(pointer:fine)").matches) anel = null;
+  if (anel) {
+    var CLICAVEL = 'a,button,summary,input,select,textarea,label,[role="button"]';
+    anelEstado.x = anelEstado.ax = innerWidth / 2;
+    anelEstado.y = anelEstado.ay = innerHeight / 2;
+    addEventListener(
+      "pointermove",
+      function (e) {
+        anelEstado.ax = e.clientX;
+        anelEstado.ay = e.clientY;
+        if (!anelEstado.vis) {
+          anelEstado.x = anelEstado.ax;
+          anelEstado.y = anelEstado.ay;
+          anelEstado.vis = true;
+          anel.classList.add("on");
+        }
+        var sob = document.elementFromPoint(anelEstado.ax, anelEstado.ay);
+        var cl = !!(sob && sob.closest(CLICAVEL));
+        if (cl !== anelEstado.cl) {
+          anelEstado.cl = cl;
+          anel.classList.toggle("clicavel", cl);
+        }
+        var sec = sob && sob.closest("section,footer");
+        var t = sec && (sec.classList.contains("sec--paper") || sec.classList.contains("sec--cream")) ? "claro" : "escuro";
+        if (t !== anelEstado.tema) {
+          anelEstado.tema = t;
+          anel.dataset.t = t;
+        }
+      },
+      { passive: true }
+    );
+    addEventListener("pointerleave", function () {
+      anelEstado.vis = false;
+      anel.classList.remove("on");
+    });
+    addEventListener("blur", function () {
+      anelEstado.vis = false;
+      anel.classList.remove("on");
+    });
+  }
+
   /* ---- 5 · revelação dos blocos, em camadas ---- */
   var items = slice(document.querySelectorAll("[data-reveal]"));
   if (reduce || !("IntersectionObserver" in window)) {
@@ -158,19 +238,25 @@
     secs.forEach(function (s) { if (s) ioRail.observe(s); });
   }
 
-  /* ---- 7 · quadro único: progresso, paralaxe e botão flutuante ----
-     Um só rAF para os três. Só transform e opacity; nada aqui lê
-     layout depois de escrever, então não há reflow forçado. */
+  /* ---- 7 · quadro único da rolagem ----
+     Progresso, paralaxe, datilografia ao rolar, tema do cabeçalho,
+     filete das seções e botão flutuante: tudo num rAF só, agendado
+     pela rolagem. Só transform e opacity; o quadro lê todas as
+     caixas antes de escrever qualquer estilo, então não há reflow
+     forçado no meio do laço. */
   (function () {
     var prog = document.querySelector(".prog");
     var float = document.querySelector(".float");
     var hero = document.querySelector(".hero");
     var contato = document.getElementById("contato");
-    var camadas = slice(document.querySelectorAll("[data-par]"));
-    if (reduce) camadas = [];
-    if (!prog && !float && !camadas.length) return;
+    var header = document.querySelector("header");
+    var camadas = reduce ? [] : slice(document.querySelectorAll("[data-par]"));
+    var bordas = slice(document.querySelectorAll("section[data-edge]"));
+    var secoes = slice(document.querySelectorAll("main section, footer"));
+    var trava = function (v, a, b) { return v < a ? a : v > b ? b : v; };
 
     var pedido = false;
+    var temaAtual = "";
     var quadro = function () {
       pedido = false;
       var vh = innerHeight;
@@ -182,11 +268,58 @@
 
       camadas.forEach(function (el) {
         var r = el.getBoundingClientRect();
-        if (r.bottom < -120 || r.top > vh + 120) return;
+        if (r.bottom < -140 || r.top > vh + 140) return;
         var amp = Number(el.getAttribute("data-par")) || 14;
         var centro = r.top + r.height / 2 - vh / 2;
-        el.style.setProperty("--py", (-(centro / vh) * amp).toFixed(1) + "px");
+        var py = -(centro / vh) * amp;
+        el.style.setProperty("--py", py.toFixed(1) + "px");
+        /* a moldura anda ao contrário da foto: é o que dá a camada.
+           Ela vive na .feature__media / .lawyer__photo, não no .shot
+           que recorta a imagem. */
+        var moldura = el.closest(".feature__media,.lawyer__photo");
+        if (moldura) moldura.style.setProperty("--pyc", (py * -0.42).toFixed(1) + "px");
       });
+
+      digitaveis.forEach(function (d) {
+        if (!d.letras.length) return;
+        var r = d.el.getBoundingClientRect();
+        if (r.bottom < -80 || r.top > vh + 80) return;
+        var p = trava((vh - r.top) / (vh * 0.5), 0, 1);
+        var n = Math.round(p * d.letras.length);
+        if (n === d.n) return;
+        d.n = n;
+        d.letras.forEach(function (i, k) {
+          i.classList.toggle("on", k < n);
+          i.classList.toggle("cur", k === n - 1 && n < d.letras.length);
+        });
+      });
+
+      bordas.forEach(function (s) {
+        if (s.__edge) return;
+        if (s.getBoundingClientRect().top < vh * 0.92) {
+          s.__edge = 1;
+          s.classList.add("edge-in");
+        }
+      });
+
+      if (header) {
+        /* Veste a seção que passa sob a linha do cabeçalho. Por geometria,
+           não por elementFromPoint: o cabeçalho é fixo e cobre o próprio
+           ponto que seria testado, então o teste devolvia sempre ele mesmo. */
+        var linha = header.offsetHeight / 2 + 6;
+        var t = "escuro";
+        for (var i = 0; i < secoes.length; i++) {
+          var rs = secoes[i].getBoundingClientRect();
+          if (rs.top <= linha && rs.bottom > linha) {
+            t = secoes[i].classList.contains("sec--paper") || secoes[i].classList.contains("sec--cream") ? "claro" : "escuro";
+            break;
+          }
+        }
+        if (t !== temaAtual) {
+          temaAtual = t;
+          header.setAttribute("data-tema", t);
+        }
+      }
 
       if (float) {
         /* some enquanto o herói está na tela e quando o contato chega:
@@ -207,6 +340,32 @@
     addEventListener("resize", agendar);
     quadro();
   })();
+
+  /* ---- 7b · laço do anel, separado porque não depende da rolagem ----
+     Só corre enquanto o ponteiro está na janela; parado, o laço morre
+     e não há rAF girando à toa. */
+  if (anel) {
+    (function () {
+      var vivo = false;
+      var passo = function () {
+        var k = reduce ? 1 : 0.22;
+        anelEstado.x += (anelEstado.ax - anelEstado.x) * k;
+        anelEstado.y += (anelEstado.ay - anelEstado.y) * k;
+        anel.style.transform = "translate(" + anelEstado.x.toFixed(1) + "px," + anelEstado.y.toFixed(1) + "px)";
+        if (anelEstado.vis) requestAnimationFrame(passo);
+        else vivo = false;
+      };
+      addEventListener(
+        "pointermove",
+        function () {
+          if (vivo) return;
+          vivo = true;
+          requestAnimationFrame(passo);
+        },
+        { passive: true }
+      );
+    })();
+  }
 
   /* ============================================================
      MEDIÇÃO — fase 2 (Search/Meta). Nada é carregado sem aceite.
