@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
+<script>document.documentElement.className="js"</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Direito Imobiliário urbano e rural — MES Advogados | Moura e Sella</title>
 <meta name="description" content="Compra e venda, locação, regularização registral e inventários com imóveis. Conteúdo informativo do escritório Moura e Sella Advogados — Eduardo Moura Sella, OAB/PR 45.770.">
@@ -15,8 +16,8 @@
 <meta property="og:title" content="Direito Imobiliário urbano e rural — MES Advogados">
 <meta property="og:description" content="Compra e venda, locação, regularização registral e inventários com imóveis. Orientação técnica antes de assinar, vender, financiar ou partilhar.">
 <!-- og:image precisa virar URL ABSOLUTA quando o dominio definitivo existir: os leitores de Open Graph nao resolvem caminho relativo (ver README). -->
-<meta property="og:image" content="assets/img/casa-familia.jpg">
-<meta property="og:image:alt" content="Casa de família ao entardecer">
+<meta property="og:image" content="assets/img/chaves-imovel.jpg">
+<meta property="og:image:alt" content="Entrega das chaves de um imóvel entre duas pessoas">
 <link rel="icon" href="assets/brand/logo-mes.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +25,16 @@
 <link rel="stylesheet" href="assets/css/mes.css">
 </head>
 <body>
+
+<!-- abertura de marca: sai sozinha pela animação CSS mesmo sem JS -->
+<div class="boot" aria-hidden="true">
+  <span class="boot__mark"></span>
+  <span class="boot__rule"></span>
+</div>
+<div class="prog" aria-hidden="true"></div>
+
+<!-- ícone do WhatsApp, declarado uma vez e reaproveitado por <use> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="ico-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.8-.78.97-.14.16-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07s.89 2.4 1.01 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.15-1.18-.06-.11-.23-.17-.48-.29Z"/></symbol></svg>
 
 <a class="skip" href="#conteudo">Ir para o conteúdo</a>
 
@@ -33,7 +44,7 @@
       <img src="assets/brand/logo-mes-cream.svg" alt="MES Advogados" width="104" height="36">
       <span class="oab">OAB/PR 45.770</span>
     </a>
-    <a class="btn btn--ghost" href="#contato" data-cta="header">Falar com o escritório</a>
+    <a class="btn btn--ghost" href="https://wa.me/5541988349124?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20de%20Direito%20Imobili%C3%A1rio%20e%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o." data-cta="header"><svg class="ico" width="17" height="17" aria-hidden="true"><use href="#ico-wa"></use></svg>Falar no WhatsApp</a>
   </div>
 </header>
 
@@ -54,12 +65,12 @@
   <section class="hero" aria-labelledby="h1">
     <div class="hero__bg" aria-hidden="true"></div>
     <div class="wrap">
-      <p class="eyebrow" data-reveal><span class="num">Direito Imobiliário</span> <span class="diamond" aria-hidden="true"></span> Urbano e rural</p>
-      <h1 id="h1" data-reveal>O imóvel é seu.<br>O papel precisa <em>dizer o mesmo.</em></h1>
-      <p class="hero__lead" data-reveal>Compra e venda, locação, regularização registral e inventários com imóveis — urbanos e rurais. Conteúdo informativo sobre o que a documentação precisa sustentar antes de você assinar, vender, financiar ou partilhar.</p>
+      <p class="eyebrow" data-reveal><span class="num" data-type>Direito Imobiliário</span> <span class="diamond" aria-hidden="true"></span> Urbano e rural</p>
+      <h1 id="h1" data-split>O imóvel é seu.<br>O papel precisa <em>dizer o mesmo.</em></h1>
+      <p class="hero__lead" data-reveal>Compra e venda, locação, regularização registral e inventários com imóveis, urbanos e rurais. Conteúdo informativo sobre o que a documentação precisa sustentar antes de você assinar, vender, financiar ou partilhar.</p>
       <div class="hero__cta" data-reveal>
         <a class="btn" href="#situacoes">Entenda como funciona</a>
-        <a class="btn btn--ghost" href="#contato" data-cta="hero">Falar com o escritório</a>
+        <a class="btn btn--ghost" href="https://wa.me/5541988349124?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20de%20Direito%20Imobili%C3%A1rio%20e%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o." data-cta="hero"><svg class="ico" width="17" height="17" aria-hidden="true"><use href="#ico-wa"></use></svg>Falar no WhatsApp</a>
       </div>
       <p class="hero__meta" data-reveal>
         <span>Moura e Sella Advogados</span>
@@ -70,8 +81,8 @@
   </section>
 
   <figure class="band">
-    <img src="assets/img/casa-familia.jpg" alt="Casa de família ao entardecer" width="1080" height="459" fetchpriority="high">
-    <figcaption><span>Urbano e rural — o mesmo cuidado documental</span></figcaption>
+    <img src="assets/img/chaves-imovel.jpg" srcset="assets/img/chaves-imovel-760.jpg 760w, assets/img/chaves-imovel.jpg 1080w" sizes="100vw" alt="Entrega das chaves de um imóvel entre duas pessoas" width="1080" height="513" fetchpriority="high" data-par="44">
+    <figcaption data-reveal><span>Urbano e rural: o mesmo cuidado documental</span></figcaption>
   </figure>
 
   <!-- ================= 01 · SITUAÇÕES ================= -->
@@ -79,25 +90,25 @@
     <div class="wrap">
       <div class="sec__head" data-reveal>
         <p class="eyebrow"><span class="num">01</span> <span class="diamond" aria-hidden="true"></span> Quando o assunto aparece</p>
-        <h2>Quase sempre, o problema não está no imóvel. Está <em>no que o papel não diz.</em></h2>
-        <p>Situações diferentes, origem parecida: a realidade e o registro deixaram de conversar em algum momento. Reconhecer em qual delas você está é o primeiro trabalho técnico.</p>
+        <h2 data-split>Quase sempre, o problema não está no imóvel. Está <em>no que o papel não diz.</em></h2>
+        <p>Situações diferentes, origem parecida: a realidade e o registro deixaram de conversar em algum momento. Reconhecer em qual delas você está já é metade do trabalho.</p>
       </div>
 
       <div class="pains">
         <article class="pain" data-reveal>
           <span class="pain__n">01</span>
           <h3>Comprar ou vender um imóvel urbano</h3>
-          <p>Matrícula com pendência, dívida que acompanha o bem, contrato de gaveta sem garantia, cessão de direitos sobre imóvel ainda financiado, distrato de unidade comprada na planta. O risco raramente aparece na visita — aparece na certidão.</p>
+          <p>Matrícula com pendência, dívida que acompanha o bem, contrato de gaveta sem garantia, cessão de direitos sobre imóvel ainda financiado, distrato de unidade comprada na planta. O risco quase nunca aparece na visita. Aparece na certidão.</p>
         </article>
         <article class="pain" data-reveal>
           <span class="pain__n">02</span>
           <h3>Comprar ou regularizar um imóvel rural</h3>
-          <p>Área registrada menor que a área ocupada, divisa negociada “de porteira”, georreferenciamento pendente, CAR, CCIR e ITR desencontrados. Enquanto ninguém mexe, convive-se com a diferença — ela trava na hora de vender, financiar ou inventariar.</p>
+          <p>Área registrada menor que a área ocupada, divisa negociada “de porteira”, CAR, CCIR e ITR desencontrados, georreferenciamento pendente — e ele hoje é exigido em qualquer transmissão, seja qual for o tamanho da área. Enquanto ninguém mexe, convive-se com a diferença. Ela reaparece na hora de vender, financiar ou inventariar, e aí trava tudo.</p>
         </article>
         <article class="pain" data-reveal>
           <span class="pain__n">03</span>
           <h3>Ter um imóvel que “é seu, mas no papel é complicado”</h3>
-          <p>Posse antiga sem título, partilha nunca registrada, área nunca retificada. Você ocupa, paga imposto e se considera dono — mas, juridicamente, vale o que está na matrícula. É um patrimônio que existe e não circula.</p>
+          <p>Posse antiga sem título, partilha nunca registrada, área nunca retificada. Você ocupa, paga imposto e se considera dono. Juridicamente, porém, vale o que está na matrícula: um patrimônio que existe e não circula.</p>
         </article>
         <article class="pain" data-reveal>
           <span class="pain__n">04</span>
@@ -112,7 +123,7 @@
         <article class="pain" data-reveal>
           <span class="pain__n">06</span>
           <h3>Estar em conflito de posse ou propriedade</h3>
-          <p>Invasão, ocupação, turbação, esbulho, disputa de divisa. Há prazos curtos que mudam o rito aplicável — e a diferença entre agir dentro ou fora deles altera as alternativas disponíveis.</p>
+          <p>Invasão, ocupação, turbação, esbulho, disputa de divisa. Há prazos curtos que mudam o rito aplicável, e agir dentro ou fora deles altera as alternativas disponíveis.</p>
         </article>
       </div>
     </div>
@@ -123,7 +134,7 @@
     <div class="wrap">
       <div class="sec__head" data-reveal>
         <p class="eyebrow"><span class="num">02</span> <span class="diamond" aria-hidden="true"></span> Frentes de atuação</p>
-        <h2>Quatro frentes técnicas que, na prática, <em>trabalham juntas.</em></h2>
+        <h2 data-split>Quatro frentes técnicas que, na prática, <em>trabalham juntas.</em></h2>
         <p>Um mesmo caso costuma atravessar contrato, registro e posse. Tratar as frentes separadamente é o que faz um processo voltar à estaca zero.</p>
       </div>
 
@@ -142,7 +153,7 @@
         <article class="front" data-reveal>
           <span class="front__n">Frente 02</span>
           <h3>Direito Registral</h3>
-          <p>O que faz o papel alcançar a realidade — e devolve liquidez a um bem que estava paralisado.</p>
+          <p>O que faz o papel alcançar a realidade e devolve liquidez a um bem que estava parado.</p>
           <ul class="tags">
             <li>Análise de matrícula</li><li>Regularização</li><li>Retificação de área</li>
             <li>Abertura de matrícula</li><li>Averbações</li><li>Adjudicação compulsória</li>
@@ -179,14 +190,14 @@
     <div class="wrap">
       <div class="feature">
         <div class="feature__media" data-reveal>
-          <img src="assets/img/chaves-imovel.jpg" alt="Entrega de chaves de um imóvel entre duas pessoas" width="1080" height="513" loading="lazy">
+          <img src="assets/img/escritura.jpg" srcset="assets/img/escritura-720.jpg 720w, assets/img/escritura.jpg 1080w" sizes="(min-width:900px) 46vw, 100vw" alt="Advogado e cliente sobre um documento assinado, ao lado de uma balança" width="1080" height="675" loading="lazy" data-par="14">
         </div>
         <div data-reveal>
           <p class="eyebrow"><span class="num">03</span> <span class="diamond" aria-hidden="true"></span> Inventários e sucessões</p>
-          <h2>Quando há um imóvel no inventário, o problema raramente é dividir. É <em>provar de quem ele é.</em></h2>
-          <p>Boa parte do que as famílias pagam num inventário não é exigência da lei: é consequência da demora. O ITCMD tem prazo e, passado o tempo, entram multa e atualização do valor dos bens — enquanto a família ainda discute quem faz o quê.</p>
-          <p>Nem todo inventário precisa de um juiz. O que define o caminho raramente é o tamanho do patrimônio: é o consenso entre os herdeiros. Havendo acordo, resolve-se em cartório. Faltando consenso, ou havendo herdeiro incapaz ou testamento, o caminho é judicial, com outro tempo e outro custo.</p>
-          <p>E quando há imóvel rural na herança, a partilha depende de uma segunda competência na mesma mesa: matrícula, cadeia dominial, georreferenciamento, CCIR, ITR e regularidade ambiental. Herda-se também um problema registral — e ele trava a partilha antes de ela começar.</p>
+          <h2 data-split>Quando há um imóvel no inventário, o problema raramente é dividir. É <em>provar de quem ele é.</em></h2>
+          <p>Boa parte do que as famílias pagam num inventário não é exigência da lei: é consequência da demora. O ITCMD tem prazo; passado ele, entram multa e atualização do valor dos bens, enquanto a família ainda discute quem faz o quê.</p>
+          <p>Nem todo inventário precisa de um juiz. Quem decide o caminho quase nunca é o tamanho do patrimônio: é o consenso entre os herdeiros. Havendo acordo, resolve-se em cartório. Faltando consenso, ou havendo herdeiro incapaz ou testamento, o caminho é judicial, com outro tempo e outro custo.</p>
+          <p>E quando há imóvel rural na herança, a partilha depende de uma segunda competência na mesma mesa: matrícula, cadeia dominial, georreferenciamento, CCIR, ITR e regularidade ambiental. Herda-se também um problema registral, e ele trava a partilha antes de ela começar.</p>
         </div>
       </div>
     </div>
@@ -197,7 +208,7 @@
     <div class="wrap">
       <div class="sec__head" data-reveal>
         <p class="eyebrow"><span class="num">04</span> <span class="diamond" aria-hidden="true"></span> Como um caso é conduzido</p>
-        <h2>Primeiro o diagnóstico. <em>Depois a estratégia.</em></h2>
+        <h2 data-split>Primeiro o diagnóstico. <em>Depois a estratégia.</em></h2>
         <p>Nenhuma das etapas abaixo antecipa resultado: elas descrevem o método de trabalho do escritório, que começa por entender o que a documentação sustenta.</p>
       </div>
 
@@ -206,7 +217,7 @@
           <span class="step__n">01</span>
           <div>
             <h3>Leitura da documentação</h3>
-            <p>Matrícula e cadeia dominial, contratos, certidões, e — no rural — CAR, CCIR, ITR e georreferenciamento. É aqui que se separa o que é problema de registro, de contrato ou de posse.</p>
+            <p>Matrícula e cadeia dominial, contratos, certidões e, no rural, CAR, CCIR, ITR e georreferenciamento. É aqui que se separa o que é problema de registro, de contrato ou de posse.</p>
           </div>
         </div>
         <div class="step" data-reveal>
@@ -220,14 +231,14 @@
           <span class="step__n">03</span>
           <div>
             <h3>Via extrajudicial ou judicial</h3>
-            <p>Boa parte do imobiliário e do sucessório admite solução em cartório, mais rápida quando há consenso e documentação regular. Quando não há, define-se a via judicial adequada — e isso é uma decisão técnica, não uma preferência.</p>
+            <p>Boa parte do imobiliário e do sucessório admite solução em cartório, mais rápida quando há consenso e documentação regular. Quando não há, define-se a via judicial adequada. Isso é decisão técnica, não preferência.</p>
           </div>
         </div>
         <div class="step" data-reveal>
           <span class="step__n">04</span>
           <div>
             <h3>Condução e acompanhamento</h3>
-            <p>Do atendimento inicial à solução, com acompanhamento direto do titular do escritório, linguagem clara e expectativas tratadas com honestidade — inclusive quando a leitura técnica é desfavorável.</p>
+            <p>Do atendimento inicial à solução, com acompanhamento direto do titular do escritório, linguagem clara e expectativas tratadas com honestidade, inclusive quando a leitura é desfavorável.</p>
           </div>
         </div>
       </div>
@@ -239,13 +250,13 @@
     <div class="wrap">
       <div class="lawyer">
         <div class="lawyer__photo" data-reveal>
-          <img src="assets/img/retrato-eduardo.jpg" alt="Eduardo Moura Sella, advogado responsável pelo escritório Moura e Sella Advogados" width="840" height="1344" loading="lazy">
+          <img src="assets/img/retrato-eduardo.jpg" srcset="assets/img/retrato-eduardo-432.jpg 432w, assets/img/retrato-eduardo.jpg 840w" sizes="(min-width:720px) 420px, 216px" alt="Eduardo Moura Sella, advogado responsável pelo escritório Moura e Sella Advogados" width="840" height="1344" loading="lazy" data-par="12">
         </div>
         <div data-reveal>
           <p class="eyebrow"><span class="num">05</span> <span class="diamond" aria-hidden="true"></span> Quem conduz</p>
-          <h2>Eduardo Moura Sella</h2>
+          <h2 data-split>Eduardo Moura Sella</h2>
           <p>Advogado há 18 anos, com atuação em direito imobiliário urbano e rural, registral, agrário, possessório, sucessório, cível e bancário. O escritório tem sede em Curitiba/PR, filial em Londrina/PR e atua em diversos Estados do Brasil.</p>
-          <p>O atendimento é conduzido diretamente pelo titular — o que, na prática, significa a mesma pessoa na análise do documento, na definição da estratégia e na audiência.</p>
+          <p>O atendimento é conduzido diretamente pelo titular: a mesma pessoa na análise do documento, na definição da estratégia e na audiência.</p>
 
           <ul class="creds">
             <li><span class="y">2003–07</span> <span>Graduação em Direito — Pontifícia Universidade Católica do Paraná (PUC/PR)</span></li>
@@ -264,7 +275,7 @@
     <div class="wrap">
       <div class="sec__head" data-reveal>
         <p class="eyebrow"><span class="num">06</span> <span class="diamond" aria-hidden="true"></span> Dúvidas frequentes</p>
-        <h2>Perguntas que aparecem <em>antes da primeira conversa.</em></h2>
+        <h2 data-split>Perguntas que aparecem <em>antes da primeira conversa.</em></h2>
         <p>Conteúdo informativo de caráter geral. Não substitui a análise do seu caso, que depende sempre dos documentos.</p>
       </div>
 
@@ -286,7 +297,7 @@
         <details>
           <summary>A matrícula do meu imóvel tem área diferente da área real. Como se corrige?</summary>
           <div class="a">
-            <p>A retificação de área é tratada nos arts. 212 e 213 da Lei 6.015/1973, com as alterações trazidas pela Lei 14.382/2022, e pode seguir a via extrajudicial, diretamente no registro de imóveis, quando preenchidos os requisitos — inclusive a anuência dos confrontantes. Não havendo acordo, discute-se judicialmente.</p>
+            <p>A retificação de área é tratada nos arts. 212 e 213 da Lei 6.015/1973, com as alterações trazidas pela Lei 14.382/2022, e pode seguir a via extrajudicial, diretamente no registro de imóveis, quando preenchidos os requisitos, entre eles a anuência dos confrontantes. Não havendo acordo, discute-se judicialmente.</p>
             <p>No imóvel rural, a retificação costuma caminhar junto com o georreferenciamento.</p>
           </div>
         </details>
@@ -294,7 +305,7 @@
           <summary>Posso comprar um imóvel financiado por “contrato de gaveta”? Quais são os riscos?</summary>
           <div class="a">
             <p>O chamado contrato de gaveta é um acordo particular que não é levado ao registro nem, em regra, comunicado à instituição financeira. Quem paga não se torna proprietário perante o registro: o imóvel continua em nome do vendedor, com os efeitos que isso produz em caso de dívida, execução, separação ou falecimento dele.</p>
-            <p>Existem caminhos jurídicos para tratar essas situações — cessão de direitos formalizada, anuência do agente financeiro, adjudicação compulsória — e a via adequada depende do que a documentação permitir.</p>
+            <p>Existem caminhos jurídicos para tratar essas situações (cessão de direitos formalizada, anuência do agente financeiro, adjudicação compulsória), e a via adequada depende do que a documentação permitir.</p>
           </div>
         </details>
         <details>
@@ -307,7 +318,7 @@
         <details>
           <summary>Sofri invasão na minha propriedade. O que muda conforme o tempo de ocupação?</summary>
           <div class="a">
-            <p>O rito aplicável depende de quando o esbulho ou a turbação ocorreu. Dentro de ano e dia — a chamada posse de força nova —, cabe o procedimento especial das ações possessórias, com possibilidade de liminar nos termos dos arts. 558 e 562 do Código de Processo Civil. Passado esse prazo, a ação segue o rito comum.</p>
+            <p>O rito aplicável depende de quando o esbulho ou a turbação ocorreu. Dentro de ano e dia, no que se chama posse de força nova, cabe o procedimento especial das ações possessórias, com possibilidade de liminar nos termos dos arts. 558 e 562 do Código de Processo Civil. Passado esse prazo, a ação segue o rito comum.</p>
             <p>A documentação da posse e a data do fato são, nesse cenário, tão relevantes quanto o título.</p>
           </div>
         </details>
@@ -321,7 +332,7 @@
         <details>
           <summary>O escritório atende fora do Paraná?</summary>
           <div class="a">
-            <p>Sim. A sede fica em Curitiba/PR, com filial em Londrina/PR, e há atuação em diversos Estados — com concentração no Centro-Sul agrícola. Questões registrais seguem a competência do registro de imóveis da situação do bem, o que é avaliado caso a caso.</p>
+            <p>Sim. A sede fica em Curitiba/PR, com filial em Londrina/PR, e há atuação em diversos Estados, com concentração no Centro-Sul agrícola. Questões registrais seguem a competência do registro de imóveis da situação do bem, o que é avaliado caso a caso.</p>
           </div>
         </details>
       </div>
@@ -333,7 +344,7 @@
     <div class="wrap">
       <div class="sec__head" data-reveal>
         <p class="eyebrow"><span class="num">07</span> <span class="diamond" aria-hidden="true"></span> Escopo de atendimento</p>
-        <h2>Para que a conversa comece <em>no lugar certo.</em></h2>
+        <h2 data-split>Para que a conversa comece <em>no lugar certo.</em></h2>
         <p>O escritório trabalha com um recorte definido de matérias. Deixar isso claro desde o início poupa o tempo de quem procura e o de quem atende.</p>
       </div>
 
@@ -367,52 +378,32 @@
     <div class="wrap">
       <div class="sec__head" data-reveal>
         <p class="eyebrow"><span class="num">08</span> <span class="diamond" aria-hidden="true"></span> Contato</p>
-        <h2>Descreva a situação. <em>A análise começa pelos documentos.</em></h2>
-        <p>Este é um canal de contato informativo. O envio não cria relação de patrocínio nem antecipa qualquer orientação sobre o caso.</p>
+        <h2 data-split>Conte a situação. <em>A análise começa pelos documentos.</em></h2>
+        <p>O caminho principal é o WhatsApp: a conversa começa direto com o escritório, sem formulário e sem cadastro. E-mail e endereço ficam ao lado, para quem preferir.</p>
       </div>
 
       <div class="contact">
-        <form id="form" data-reveal data-endpoint="" data-wa="5541988349124" data-origem="lp-direito-imobiliario" data-intro="Olá, vim pela página de Direito Imobiliário." novalidate>
-          <div class="field">
-            <label for="f-nome">Nome</label>
-            <input id="f-nome" name="nome" type="text" autocomplete="name" required placeholder="Como devemos chamá-lo">
-          </div>
-          <div class="field">
-            <label for="f-contato">WhatsApp ou e-mail</label>
-            <input id="f-contato" name="contato" type="text" autocomplete="tel" required placeholder="Para retorno">
-          </div>
-          <div class="field">
-            <label for="f-assunto">Assunto</label>
-            <select id="f-assunto" name="assunto" required>
-              <option value="">Selecione</option>
-              <option>Compra e venda de imóvel</option>
-              <option>Locação, revisão ou despejo</option>
-              <option>Regularização registral / matrícula</option>
-              <option>Usucapião</option>
-              <option>Inventário ou planejamento sucessório</option>
-              <option>Imóvel rural / regularização fundiária</option>
-              <option>Conflito de posse ou propriedade</option>
-              <option>Outro</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="f-valor">Valor aproximado envolvido <span class="opt">(opcional)</span></label>
-            <select id="f-valor" name="valor">
-              <option value="">Prefiro não informar</option>
-              <option>Até R$ 100 mil</option>
-              <option>De R$ 100 mil a R$ 300 mil</option>
-              <option>De R$ 300 mil a R$ 1 milhão</option>
-              <option>Acima de R$ 1 milhão</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="f-msg">Em poucas linhas, o que está acontecendo</label>
-            <textarea id="f-msg" name="mensagem" placeholder="Ex.: comprei uma área em 2019, a matrícula indica metragem menor que a cercada e agora preciso vender."></textarea>
-          </div>
-          <button class="btn" type="submit">Enviar</button>
-          <p class="form__status" id="status" role="status" aria-live="polite"></p>
-          <p class="form__note">Os dados enviados são usados apenas para responder a este contato. Não publique neste formulário documentos sigilosos ou dados de terceiros.</p>
-        </form>
+        <div class="zap" data-reveal>
+          <p class="zap__kicker">Atendimento por WhatsApp</p>
+          <h3>O contato do escritório é pelo WhatsApp.</h3>
+          <p class="zap__lead">Não há formulário nem cadastro: a conversa começa direto com o escritório. Escolha abaixo o assunto mais próximo do seu e a mensagem já abre escrita — você ainda pode apagar e escrever do seu jeito.</p>
+
+          <p class="zap__ask">Qual é o assunto?</p>
+          <ul class="zap__chips">
+            <li><a class="chip" href="https://wa.me/5541988349124?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20de%20Direito%20Imobili%C3%A1rio%20do%20escrit%C3%B3rio.%20O%20assunto%20%C3%A9%3A%20Compra%20e%20venda%20de%20im%C3%B3vel." data-cta="assunto">Compra e venda de imóvel</a></li>
+            <li><a class="chip" href="https://wa.me/5541988349124?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20de%20Direito%20Imobili%C3%A1rio%20do%20escrit%C3%B3rio.%20O%20assunto%20%C3%A9%3A%20Loca%C3%A7%C3%A3o%2C%20revis%C3%A3o%20ou%20despejo." data-cta="assunto">Locação, revisão ou despejo</a></li>
+            <li><a class="chip" href="https://wa.me/5541988349124?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20de%20Direito%20Imobili%C3%A1rio%20do%20escrit%C3%B3rio.%20O%20assunto%20%C3%A9%3A%20Regulariza%C3%A7%C3%A3o%20registral%20ou%20matr%C3%ADcula." data-cta="assunto">Regularização registral ou matrícula</a></li>
+            <li><a class="chip" href="https://wa.me/5541988349124?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20de%20Direito%20Imobili%C3%A1rio%20do%20escrit%C3%B3rio.%20O%20assunto%20%C3%A9%3A%20Usucapi%C3%A3o." data-cta="assunto">Usucapião</a></li>
+            <li><a class="chip" href="https://wa.me/5541988349124?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20de%20Direito%20Imobili%C3%A1rio%20do%20escrit%C3%B3rio.%20O%20assunto%20%C3%A9%3A%20Invent%C3%A1rio%20ou%20planejamento%20sucess%C3%B3rio." data-cta="assunto">Inventário ou planejamento sucessório</a></li>
+            <li><a class="chip" href="https://wa.me/5541988349124?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20de%20Direito%20Imobili%C3%A1rio%20do%20escrit%C3%B3rio.%20O%20assunto%20%C3%A9%3A%20Im%C3%B3vel%20rural%20e%20regulariza%C3%A7%C3%A3o%20fundi%C3%A1ria." data-cta="assunto">Imóvel rural e regularização fundiária</a></li>
+            <li><a class="chip" href="https://wa.me/5541988349124?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20de%20Direito%20Imobili%C3%A1rio%20do%20escrit%C3%B3rio.%20O%20assunto%20%C3%A9%3A%20Conflito%20de%20posse%20ou%20propriedade." data-cta="assunto">Conflito de posse ou propriedade</a></li>
+            <li><a class="chip" href="https://wa.me/5541988349124?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20de%20Direito%20Imobili%C3%A1rio%20do%20escrit%C3%B3rio.%20O%20assunto%20%C3%A9%3A%20Outro%20assunto." data-cta="assunto">Outro assunto</a></li>
+          </ul>
+
+          <a class="btn btn--zap" href="https://wa.me/5541988349124?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20de%20Direito%20Imobili%C3%A1rio%20e%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o." data-cta="contato-principal"><svg class="ico" width="18" height="18" aria-hidden="true"><use href="#ico-wa"></use></svg>Abrir conversa no WhatsApp</a>
+
+          <p class="zap__note">Canal de contato informativo. A mensagem não cria relação de patrocínio nem antecipa orientação sobre o caso. Nesta primeira conversa, não envie documentos sigilosos nem dados de terceiros.</p>
+        </div>
 
         <div data-reveal>
           <dl class="channels">
@@ -462,9 +453,9 @@
   </div>
 </footer>
 
-<a class="float" href="https://wa.me/5541988349124?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20de%20Direito%20Imobili%C3%A1rio%20e%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o." data-cta="float" aria-label="Falar com o escritório no WhatsApp">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.8-.78.97-.14.16-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07s.89 2.4 1.01 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.08.15-1.18-.06-.11-.23-.17-.48-.29Z"/></svg>
-  <span>Falar com o escritório</span>
+<a class="float" data-off href="https://wa.me/5541988349124?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20de%20Direito%20Imobili%C3%A1rio%20e%20gostaria%20de%20uma%20orienta%C3%A7%C3%A3o." data-cta="float">
+  <svg class="ico" width="20" height="20" aria-hidden="true"><use href="#ico-wa"></use></svg>
+  <span>Falar no WhatsApp</span>
 </a>
 
 <div id="cc" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
