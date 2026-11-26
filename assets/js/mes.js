@@ -385,25 +385,15 @@
   }
 
   /* ============================================================
-     MEDIÇÃO — Search/Meta. Nada é carregado sem aceite.
-     Os IDs vêm de window.MES_TAGS, definido em cada index.html:
-       metaPixel       Meta Pixel (só números)
-       ga4             GA4, "G-XXXXXXXXXX"
-       googleAds       conta do Google Ads, "AW-XXXXXXXXX"
-       googleAdsLabel  rótulo da conversão "clique no WhatsApp"
+     MEDIÇÃO — fase 2 (Search/Meta). Nada é carregado sem aceite.
+     Os IDs vêm de window.MES_TAGS, definido em cada index.html.
      Vazio = nenhum script de terceiro roda e o aviso nem aparece.
-     Google: um só gtag.js carrega GA4 e Ads juntos (dois "config"),
-     então não precisa de Tag Manager.
      ============================================================ */
-  var TAGS = window.MES_TAGS || {};
-  var temGoogle = !!(TAGS.ga4 || TAGS.googleAds);
+  var TAGS = window.MES_TAGS || { metaPixel: "", googleTag: "" };
   var cc = document.getElementById("cc");
   var KEY = "mes-consent";
-  var carregou = false;
 
   function loadTags() {
-    if (carregou) return;
-    carregou = true;
     if (TAGS.metaPixel) {
       !function (f, b, e, v, n, t, s) {
         if (f.fbq) return; n = f.fbq = function () {
@@ -416,58 +406,23 @@
       window.fbq("init", TAGS.metaPixel);
       window.fbq("track", "PageView");
     }
-    if (temGoogle) {
+    if (TAGS.googleTag) {
       var s = document.createElement("script");
       s.async = true;
-      s.src = "https://www.googletagmanager.com/gtag/js?id=" + (TAGS.ga4 || TAGS.googleAds);
+      s.src = "https://www.googletagmanager.com/gtag/js?id=" + TAGS.googleTag;
       document.head.appendChild(s);
       window.dataLayer = window.dataLayer || [];
       window.gtag = function () { window.dataLayer.push(arguments); };
       window.gtag("js", new Date());
-      if (TAGS.ga4) window.gtag("config", TAGS.ga4);
-      if (TAGS.googleAds) window.gtag("config", TAGS.googleAds);
+      window.gtag("config", TAGS.googleTag);
     }
   }
 
-  /* ---- conversão: todo clique no WhatsApp ----
-     Só dispara se os pixels foram carregados (ou seja, houve aceite).
-     O "assunto" é o texto do chip escolhido; nos demais botões vai o
-     nome do local (data-cta). Atribuído ao <a href>, não a um handler
-     do botão: o link funciona igual se este arquivo não carregar. */
-  function assuntoDe(a) {
-    if (a.classList.contains("chip")) return a.textContent.replace(/\s+/g, " ").trim();
-    return "Orientação geral";
-  }
-  document.addEventListener("click", function (ev) {
-    var a = ev.target.closest && ev.target.closest('a[href*="wa.me/"]');
-    if (!a || !carregou) return;
-    var assunto = assuntoDe(a);
-    var local = a.getAttribute("data-cta") || "link";
-    try {
-      if (window.fbq && TAGS.metaPixel) {
-        window.fbq("track", "Contact", { content_name: assunto, content_category: local });
-      }
-      if (window.gtag) {
-        if (TAGS.ga4) {
-          window.gtag("event", "generate_lead", {
-            assunto: assunto, local: local, transport_type: "beacon"
-          });
-        }
-        if (TAGS.googleAds && TAGS.googleAdsLabel) {
-          window.gtag("event", "conversion", {
-            send_to: TAGS.googleAds + "/" + TAGS.googleAdsLabel,
-            assunto: assunto
-          });
-        }
-      }
-    } catch (e) { /* medição nunca pode travar o clique */ }
-  }, true);
-
   /* ---- origem na mensagem do WhatsApp ----
      Lê utm_campaign (ou utm_source) da URL e acrescenta "[ref: ...]" ao
-     texto pré-preenchido. Roda sempre, sem consentimento: é só a URL
-     que a pessoa já abriu, nada é gravado nem enviado a terceiros.
-     Sem UTM, a mensagem fica como está (= visita orgânica). */
+     texto pré-preenchido. É só texto de mensagem: não carrega script de
+     terceiro, não grava nada e não envia nada a ninguém. Sem UTM, a
+     mensagem fica como está (= visita orgânica). */
   (function () {
     var q;
     try { q = new URLSearchParams(location.search); } catch (e) { return; }
@@ -486,7 +441,7 @@
     var saved = null;
     try { saved = localStorage.getItem(KEY); } catch (e) { /* modo privado */ }
     if (saved === "ok") loadTags();
-    else if (saved !== "no" && (TAGS.metaPixel || temGoogle)) cc.setAttribute("data-open", "");
+    else if (saved !== "no" && (TAGS.metaPixel || TAGS.googleTag)) cc.setAttribute("data-open", "");
 
     var ok = document.getElementById("cc-ok");
     var no = document.getElementById("cc-no");
