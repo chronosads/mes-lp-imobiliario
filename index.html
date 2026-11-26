@@ -40,7 +40,7 @@
 
 <header id="topo">
   <div class="wrap">
-    <a class="brand" href="#topo">
+    <a class="brand" href="https://mes.adv.br/" aria-label="MES Advogados — Moura e Sella Advogados (site do escritório)">
       <img class="brand__cream" src="assets/brand/logo-mes-cream.svg" alt="MES Advogados" width="104" height="36">
       <img class="brand__navy" src="assets/brand/logo-mes.svg" alt="" aria-hidden="true" width="104" height="36">
       <span class="oab">OAB/PR 45.770</span>
@@ -439,7 +439,7 @@
   <div class="wrap">
     <div class="foot__top">
       <div>
-        <img src="assets/brand/logo-mes-full-cream.svg" alt="MES — Moura e Sella Advogados" width="132" height="51">
+        <a href="https://mes.adv.br/" aria-label="MES — Moura e Sella Advogados (site do escritório)"><img src="assets/brand/logo-mes-full-cream.svg" alt="MES — Moura e Sella Advogados" width="132" height="51"></a>
         <p>Eduardo Moura Sella Sociedade Individual de Advocacia<br>CNPJ 65.041.122/0001-71</p>
       </div>
       <div class="foot__legal">
@@ -450,6 +450,7 @@
     <div class="foot__bottom">
       <span>© <span id="ano">2026</span> Moura e Sella Advogados — MES Advogados</span>
       <span>Eduardo Moura Sella · OAB/PR 45.770</span>
+      <a href="/privacidade/">Política de privacidade e cookies</a>
     </div>
   </div>
 </footer>
@@ -460,12 +461,21 @@
 </a>
 
 <div id="cc" role="dialog" aria-live="polite" aria-label="Aviso de cookies">
-  <p>Usamos cookies de medição apenas se você concordar. Nada é carregado antes disso.</p>
+  <p>Usamos cookies de medição apenas se você concordar. Nada é carregado antes disso. <a href="/privacidade/">Política de privacidade</a>.</p>
   <button type="button" class="ok" id="cc-ok">Aceitar</button>
   <button type="button" id="cc-no">Recusar</button>
 </div>
 
-<script>window.MES_TAGS={metaPixel:"",googleTag:""};</script>
+<script>
+/* MEDIÇÃO — PREENCHER: aguardando os IDs reais (Guilherme / cliente).
+   Enquanto vazio, nenhum script de terceiro roda e o aviso de cookies nem aparece.
+   Não invente ID: deixe "" até a conta existir.
+     metaPixel       Meta Pixel (só números)
+     ga4             GA4, "G-XXXXXXXXXX"
+     googleAds       conta do Google Ads, "AW-XXXXXXXXX"
+     googleAdsLabel  rótulo da conversão "clique no WhatsApp" (parte depois da barra de AW-XXXX/rótulo) */
+window.MES_TAGS={metaPixel:"",ga4:"",googleAds:"",googleAdsLabel:""};
+</script>
 <script src="assets/js/mes.js" defer></script>
 
 <script type="application/ld+json">

@@ -691,3 +691,27 @@ header[data-tema="claro"] .brand__navy{display:block}
   transition:color .3s,border-color .3s;
 }
 .scope__hint a:hover{color:var(--gold-soft)}
+
+/* ---------- links do rodapé e do aviso de cookies ---------- */
+.foot__bottom a{color:var(--cream-dim);text-underline-offset:3px}
+.foot__bottom a:hover{color:var(--gold-soft)}
+#cc a{color:var(--gold-soft);text-underline-offset:3px}
+
+/* ---------- páginas internas: privacidade e 404 ---------- */
+.doc{padding:clamp(120px,14vw,168px) 0 clamp(56px,7vw,96px)}
+.doc h1{font-size:clamp(2rem,4.4vw,3.25rem);margin-bottom:12px}
+.doc h1 em{font-style:italic;color:var(--gold-soft)}
+.doc .doc__meta{color:var(--grey-dim);font-size:.8125rem;margin:0 0 40px}
+.doc h2{font-size:clamp(1.3rem,2.2vw,1.65rem);margin:44px 0 12px;color:var(--cream)}
+.doc p,.doc li{max-width:68ch;color:var(--cream-dim)}
+.doc ul{padding-left:1.2em;margin:12px 0}
+.doc li{margin:6px 0}
+.doc a:not(.btn){color:var(--gold-soft);text-underline-offset:3px}
+.doc table{border-collapse:collapse;width:100%;max-width:820px;margin:16px 0;font-size:.875rem}
+.doc th,.doc td{border-bottom:1px solid var(--line-dark);padding:10px 12px 10px 0;text-align:left;vertical-align:top;color:var(--cream-dim)}
+.doc th{color:var(--cream);font-weight:500}
+.doc .tablewrap{overflow-x:auto}
+.doc--404{min-height:78svh;display:flex;align-items:center}
+.doc--404 .btn{margin-top:28px;width:auto}
+.doc--404 p + p{margin-top:0}
+.doc--404 .doc__code{font:italic 400 clamp(4rem,12vw,8rem)/1 var(--serif);color:var(--gold);margin:0 0 8px}
