@@ -428,7 +428,7 @@ footer{background:var(--ink);padding:clamp(56px,6vw,84px) 0 40px;color:var(--gre
    ali já existe um botão grande, e dois ao mesmo tempo leem como erro */
 .js .float[data-off]{opacity:0;transform:translateY(130%);pointer-events:none}
 @media (max-width:620px){
-  body{padding-bottom:62px}
+  body:has(.float){padding-bottom:62px}
   .float{
     right:0;left:0;bottom:0;border-radius:0;padding:19px 20px;
     box-shadow:0 -8px 28px rgba(7,12,23,.5);
